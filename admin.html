@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EdVanguard AI | Admin Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/theme.css"/>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="app-shell">
+<div class="aurora-blob b1"></div>
+<div class="aurora-blob b2"></div>
+<div class="aurora-blob b3"></div>
+
+<div id="sidebarScrim" class="hidden fixed inset-0 bg-black/30 z-30 md:hidden"></div>
+
+<!-- SideNavBar -->
+<aside id="sidebar" class="content-layer h-screen w-64 fixed left-0 top-0 z-40 glass-nav border-r border-outline-variant flex flex-col py-6 gap-2 -translate-x-full md:translate-x-0 transition-transform">
+  <div class="px-6 mb-8">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined">school</span></div>
+      <div><h1 class="text-headline-md font-headline-md text-primary tracking-tight leading-none">EdVanguard AI</h1><p class="text-label-sm font-label-sm text-secondary-container">Admin Portal</p></div>
+    </div>
+  </div>
+  <nav data-lenis-prevent class="flex-1 px-2 space-y-1 overflow-y-auto">
+    <a href="#overview" class="nav-item active"><span class="material-symbols-outlined">dashboard</span>Overview</a>
+    <a href="#zoning" class="nav-item"><span class="material-symbols-outlined">videocam</span>Camera Zoning</a>
+    <a href="#tuning" class="nav-item"><span class="material-symbols-outlined">fingerprint</span>Recognition Tuning</a>
+    <a href="#session" class="nav-item"><span class="material-symbols-outlined">calendar_month</span>Session Master</a>
+    <a href="#audit" class="nav-item"><span class="material-symbols-outlined">menu_book</span>Audit Logs</a>
+    <a href="#hierarchy" class="nav-item"><span class="material-symbols-outlined">account_tree</span>Hierarchy</a>
+    <a href="#reports" class="nav-item"><span class="material-symbols-outlined">verified_user</span>Reports &amp; Compliance</a>
+  </nav>
+  <div class="mt-auto px-4 py-4 space-y-3">
+    <div class="p-3 rounded-xl bg-surface-container-low text-[11px] text-on-surface-variant">
+      Previewing as <strong>Admin</strong>.
+      <div class="flex flex-wrap gap-2 mt-2">
+        <a href="student.html" class="text-primary font-bold hover:underline">Student</a>
+        <a href="faculty.html" class="text-primary font-bold hover:underline">Faculty</a>
+        <a href="parent.html" class="text-primary font-bold hover:underline">Parent</a>
+      </div>
+    </div>
+    <button class="w-full bg-error text-on-error py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all active:scale-95" data-demo-action="Emergency lockdown initiated — all zones secured">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">emergency_home</span>Emergency Lockdown
+    </button>
+    <a href="index.html" class="nav-item"><span class="material-symbols-outlined">logout</span>Sign Out</a>
+  </div>
+</aside>
+
+<main class="content-layer md:ml-64 min-h-screen">
+  <header class="glass-nav sticky top-0 z-30 shadow-[0px_4px_12px_rgba(0,0,0,0.06)] px-4 md:px-margin-desktop py-4 flex justify-between items-center max-w-container-max-width mx-auto">
+    <div class="flex items-center gap-8">
+      <button id="mobileMenuBtn" class="md:hidden p-2 hover:bg-surface-container rounded-full"><span class="material-symbols-outlined">menu</span></button>
+      <span class="text-headline-md font-headline-md font-bold text-primary tracking-tight md:hidden">EdVanguard</span>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a class="text-primary font-body-md border-b-2 border-primary pb-1" href="#overview">Dashboard</a>
+        <a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="#" data-demo-action="Analytics view">Analytics</a>
+        <a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="#session">Schedule</a>
+        <a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="#" data-demo-action="Resources view">Resources</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="relative hidden sm:block">
+        <input class="bg-surface-container-low border-none rounded-full px-5 py-2 w-64 focus:ring-2 focus:ring-primary/20 text-body-md transition-all" placeholder="Search institutional records..." type="text"/>
+        <span class="material-symbols-outlined absolute right-3 top-2 text-outline">search</span>
+      </div>
+      <div class="relative">
+        <button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all" data-toggle="notif"><span class="material-symbols-outlined">notifications</span></button>
+        <div id="notifPanel" class="hidden absolute right-0 mt-2 w-72 card p-3 z-50 text-[13px]">
+          <p class="text-label-sm font-bold mb-2 px-1">Notifications</p>
+          <div class="p-2 rounded-lg bg-surface-container-low mb-2">Zone C camera override flagged for review.</div>
+          <div class="p-2 rounded-lg bg-surface-container-low">Mid-term compliance audit in 3 weeks.</div>
+        </div>
+      </div>
+      <button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all" data-demo-action="Settings opened"><span class="material-symbols-outlined">settings</span></button>
+      <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block"><p class="text-label-sm font-bold leading-none">Dr. Alistair Vance</p><p class="text-[10px] text-secondary">Chief Administrator</p></div>
+        <div class="w-10 h-10 rounded-full border-2 border-primary-container bg-primary-fixed flex items-center justify-center font-bold text-primary">AV</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-margin-mobile md:p-12 max-w-container-max-width mx-auto" id="overview">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6 fade-in-item">
+      <div><h2 class="text-display-lg font-display-lg text-on-surface tracking-tight">Admin Management</h2><p class="text-body-lg text-secondary mt-2">Institutional hierarchy and global compliance oversight.</p></div>
+      <div class="flex gap-3">
+        <button class="px-6 py-3 rounded-[14px] bg-primary text-on-primary font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95" data-demo-action="Compliance report submitted to government portal"><span class="material-symbols-outlined">upload_file</span>Submit Compliance Report</button>
+        <button class="px-6 py-3 rounded-[14px] bg-surface-container-high text-on-surface font-semibold flex items-center gap-2 border border-outline-variant hover:bg-surface-variant transition-all" data-demo-action="Full audit trail opened"><span class="material-symbols-outlined">history</span>Audit Trails</button>
+      </div>
+    </div>
+
+    <div class="bento-grid grid grid-cols-12 gap-gutter">
+
+      <!-- Camera Zoning Map -->
+      <section id="zoning" class="col-span-12 lg:col-span-8 card p-6 flex flex-col scroll-mt-24">
+        <div class="flex justify-between items-center mb-6">
+          <div><h3 class="text-headline-md font-headline-md">Camera Zoning Map</h3><p class="text-label-sm text-secondary">Active surveillance coverage and AI node status.</p></div>
+          <span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-label-sm flex items-center gap-1"><span class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></span>42 Nodes Online</span>
+        </div>
+        <div class="relative w-full aspect-[21/9] rounded-[16px] overflow-hidden bg-gradient-to-br from-surface-container to-surface-container-high shadow-inner">
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none"><div class="w-full h-full border-[1px] border-primary/10 grid grid-cols-6 grid-rows-3 opacity-30"></div></div>
+          <div class="absolute top-8 left-8 p-4 glass-panel bg-white/60 rounded-xl border border-white/40 shadow-lg"><p class="text-[10px] uppercase font-bold text-primary mb-1">Zone A-12: Main Plaza</p><p class="text-body-md font-bold">89% Recognition Rate</p></div>
+          <div class="absolute bottom-8 right-10 p-3 glass-panel bg-white/60 rounded-xl border border-white/40 shadow-lg"><p class="text-[10px] uppercase font-bold text-primary mb-1">Zone C-04: North Gate</p><p class="text-body-md font-bold">94% Recognition Rate</p></div>
+          <span class="absolute top-1/2 left-1/3 w-3 h-3 rounded-full bg-tertiary shadow-[0_0_10px_rgba(0,125,85,0.6)] animate-pulse"></span>
+          <span class="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-tertiary shadow-[0_0_10px_rgba(0,125,85,0.6)] animate-pulse"></span>
+          <span class="absolute bottom-1/3 left-1/2 w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_rgba(37,99,235,0.6)] animate-pulse"></span>
+        </div>
+
+        <!-- Camera Hardware Assignment -->
+        <div class="mt-6">
+          <div class="flex items-center justify-between mb-3"><h4 class="font-bold text-body-md">Camera Hardware Assignment</h4><button class="text-primary text-label-sm font-bold hover:underline" data-demo-action="New camera node assigned">+ Assign Node</button></div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-[13px]">
+              <thead><tr class="text-label-sm text-secondary border-b border-outline-variant"><th class="pb-2">Node ID</th><th class="pb-2">Zone</th><th class="pb-2">Device</th><th class="pb-2">Status</th></tr></thead>
+              <tbody>
+                <tr class="border-b border-outline-variant/30"><td class="py-2 font-label-sm">CAM-A12</td><td class="py-2">Main Plaza</td><td class="py-2">EdgeVision X2</td><td class="py-2"><span class="pill bg-tertiary-container/10 text-tertiary">Online</span></td></tr>
+                <tr class="border-b border-outline-variant/30"><td class="py-2 font-label-sm">CAM-C04</td><td class="py-2">North Gate</td><td class="py-2">EdgeVision X2</td><td class="py-2"><span class="pill bg-tertiary-container/10 text-tertiary">Online</span></td></tr>
+                <tr><td class="py-2 font-label-sm">CAM-B07</td><td class="py-2">Library Annex</td><td class="py-2">EdgeVision X1</td><td class="py-2"><span class="pill bg-secondary-container text-on-secondary-container">Maintenance</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Session Master -->
+      <section id="session" class="col-span-12 lg:col-span-4 card p-6 scroll-mt-24">
+        <div class="flex items-center gap-3 mb-6"><span class="material-symbols-outlined text-primary">calendar_month</span><h3 class="text-headline-md font-headline-md">Session Master</h3></div>
+        <div class="space-y-4">
+          <div class="p-4 bg-primary-fixed text-on-primary-fixed rounded-xl border border-primary-container/20">
+            <div class="flex justify-between items-start mb-2"><span class="text-label-sm font-bold uppercase tracking-wider">Active Term</span><span class="px-2 py-0.5 bg-white/30 rounded text-[10px] font-bold">IN PROGRESS</span></div>
+            <p class="text-headline-md font-bold">Fall Semester 2026</p><p class="text-body-md opacity-80 mt-1">Aug 17 — Dec 19</p>
+          </div>
+          <div class="space-y-3 mt-6">
+            <h4 class="text-label-sm font-bold text-secondary-fixed-variant border-b border-outline-variant pb-2">UPCOMING MILESTONES</h4>
+            <div class="flex gap-4 items-center p-2"><div class="text-center"><p class="text-label-sm text-secondary uppercase font-bold">Aug</p><p class="text-headline-md leading-none">12</p></div><div><p class="font-bold">Mid-Term Compliance Audit</p><p class="text-label-sm text-secondary">Government reporting deadline</p></div></div>
+            <div class="flex gap-4 items-center p-2 opacity-60"><div class="text-center"><p class="text-label-sm text-secondary uppercase font-bold">Sep</p><p class="text-headline-md leading-none">05</p></div><div><p class="font-bold">Spring Registration Open</p><p class="text-label-sm text-secondary">AI enrollment projection sync</p></div></div>
+          </div>
+          <button class="w-full mt-2 h-11 rounded-xl border border-outline-variant font-bold text-label-sm hover:bg-surface-container-low transition-all" data-demo-action="Semester configuration panel opened">Configure Semester</button>
+        </div>
+      </section>
+
+      <!-- Facial Recognition Threshold Tuning -->
+      <section id="tuning" class="col-span-12 lg:col-span-5 card p-6 scroll-mt-24">
+        <div class="flex items-center gap-3 mb-2"><span class="material-symbols-outlined text-primary">fingerprint</span><h3 class="text-headline-md font-headline-md">Recognition Threshold Tuning</h3></div>
+        <p class="text-label-sm text-secondary mb-6">Balance false-acceptance safety against smoother check-ins.</p>
+        <div class="mb-6">
+          <div class="flex justify-between mb-2"><span class="text-label-sm font-bold text-on-surface-variant">Confidence Threshold</span><span class="text-label-sm font-bold text-primary" id="thresholdOut">92%</span></div>
+          <input type="range" min="70" max="99" value="92" class="fr-slider w-full" data-output="#thresholdOut">
+          <div class="flex justify-between text-[10px] text-outline mt-1"><span>More Lenient</span><span>More Strict</span></div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-4 bg-surface-container-low rounded-xl text-center"><p class="text-label-sm text-secondary">False Acceptance</p><p class="text-headline-md font-bold text-tertiary">0.0008%</p></div>
+          <div class="p-4 bg-surface-container-low rounded-xl text-center"><p class="text-label-sm text-secondary">Avg. Match Time</p><p class="text-headline-md font-bold">0.24s</p></div>
+        </div>
+        <button class="w-full mt-6 h-11 rounded-xl bg-primary text-on-primary font-bold text-label-sm hover:opacity-90 transition-all" data-demo-action="Recognition threshold saved and deployed to all edge nodes">Save &amp; Deploy to Nodes</button>
+      </section>
+
+      <!-- Security & Audit Logs -->
+      <section id="audit" class="col-span-12 lg:col-span-7 card p-6 scroll-mt-24">
+        <div class="flex justify-between items-center mb-6"><h3 class="text-headline-md font-headline-md">Security &amp; Audit Logs</h3><button class="text-primary font-bold text-label-sm flex items-center gap-1 hover:underline" data-demo-action="Full audit log opened">View All Logs <span class="material-symbols-outlined text-[18px]">arrow_forward</span></button></div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead><tr class="text-label-sm text-secondary border-b border-outline-variant"><th class="pb-3 font-bold">TIMESTAMP</th><th class="pb-3 font-bold">ACTOR</th><th class="pb-3 font-bold">ACTION TYPE</th><th class="pb-3 font-bold">STATUS</th></tr></thead>
+            <tbody class="text-body-md">
+              <tr class="border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors"><td class="py-4 font-label-sm text-[13px]">12:42:01 PM</td><td class="py-4"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold">JD</div><span>Jonathan Doe</span></div></td><td class="py-4">Zone C Camera Override</td><td class="py-4"><span class="px-3 py-1 bg-error-container text-on-error-container rounded-full text-[11px] font-bold">WARNING</span></td></tr>
+              <tr class="border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors"><td class="py-4 font-label-sm text-[13px]">12:15:34 PM</td><td class="py-4"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-[10px] font-bold">AI</div><span>Core System</span></div></td><td class="py-4">Attendance Log Finalized</td><td class="py-4"><span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-[11px] font-bold">SUCCESS</span></td></tr>
+              <tr class="hover:bg-surface-container-low transition-colors"><td class="py-4 font-label-sm text-[13px]">11:58:12 AM</td><td class="py-4"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold">SV</div><span>Sarah Vance</span></div></td><td class="py-4">Database Policy Update</td><td class="py-4"><span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[11px] font-bold">PENDING</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Institutional Hierarchy -->
+      <section id="hierarchy" class="col-span-12 lg:col-span-5 card p-6 scroll-mt-24">
+        <h3 class="text-headline-md font-headline-md mb-6">Institutional Hierarchy</h3>
+        <div class="space-y-3">
+          <div class="p-4 bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10"><div class="flex items-center gap-4"><div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-primary">corporate_fare</span></div><div><p class="font-bold">Faculty of Engineering</p><p class="text-label-sm text-secondary">12 Departments · 450 Staff</p></div></div><span class="material-symbols-outlined text-outline">chevron_right</span></div>
+          <div class="p-4 bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10"><div class="flex items-center gap-4"><div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-primary">science</span></div><div><p class="font-bold">Natural Sciences</p><p class="text-label-sm text-secondary">8 Departments · 310 Staff</p></div></div><span class="material-symbols-outlined text-outline">chevron_right</span></div>
+          <div class="p-4 bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10"><div class="flex items-center gap-4"><div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-primary">menu_book</span></div><div><p class="font-bold">Arts &amp; Humanities</p><p class="text-label-sm text-secondary">15 Departments · 280 Staff</p></div></div><span class="material-symbols-outlined text-outline">chevron_right</span></div>
+          <button class="w-full py-4 border-2 border-dashed border-outline-variant rounded-xl text-secondary hover:bg-surface-container-low transition-all flex items-center justify-center gap-2 mt-4 font-bold" data-demo-action="New faculty/branch form opened"><span class="material-symbols-outlined">add_business</span>Add New Faculty/Branch</button>
+        </div>
+      </section>
+
+      <!-- Reports & Analytics -->
+      <section id="reports" class="col-span-12 card p-6 scroll-mt-24">
+        <h3 class="text-headline-md font-headline-md mb-4">Reports &amp; Analytics</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button class="flex items-center gap-3 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all text-left" data-demo-action="Institution-wide defaulter list generated"><span class="material-symbols-outlined text-primary">fact_check</span><div><p class="font-bold text-body-md">Defaulter List Generation</p><p class="text-label-sm text-outline">Below-threshold students, all campuses</p></div></button>
+          <button class="flex items-center gap-3 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all text-left" data-demo-action="Export started — CSV, XLSX, and PDF"><span class="material-symbols-outlined text-primary">file_download</span><div><p class="font-bold text-body-md">Export (CSV, XLSX, PDF)</p><p class="text-label-sm text-outline">Attendance, fees, and audit data</p></div></button>
+          <button class="flex items-center gap-3 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all text-left" data-demo-action="Government compliance submission queued"><span class="material-symbols-outlined text-primary">gavel</span><div><p class="font-bold text-body-md">Government Compliance Submission</p><p class="text-label-sm text-outline">Auto-formatted regulatory package</p></div></button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <button class="content-layer fixed bottom-10 right-10 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group" id="chatFab">
+    <span class="material-symbols-outlined text-3xl">support_agent</span>
+    <span class="absolute right-full mr-4 px-3 py-2 bg-on-surface text-surface text-label-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Admin Support</span>
+  </button>
+  <div id="chatWindow" class="chat-window content-layer fixed bottom-32 right-10 w-[90vw] max-w-[340px] h-[420px] card flex flex-col z-50 overflow-hidden">
+    <div class="p-4 bg-primary text-white flex justify-between items-center"><div><p class="font-bold">EdVanguard Assistant</p><p class="text-[11px] opacity-80">Ask about compliance, zones, or logs</p></div><button id="chatClose"><span class="material-symbols-outlined">close</span></button></div>
+    <div id="chatBody" data-lenis-prevent class="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col"><div class="mr-auto max-w-[85%] bg-surface-container-low text-on-surface text-[13px] rounded-2xl rounded-tl-sm px-4 py-2">Hello Dr. Vance. I can help pull audit records or generate compliance reports.</div></div>
+    <form id="chatForm" class="p-3 border-t border-outline-variant flex gap-2"><input id="chatInput" class="flex-1 h-10 px-3 rounded-full border border-outline-variant input-focus-ring text-[13px]" placeholder="Type a message..."/><button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">send</span></button></form>
+  </div>
+</main>
+
+<nav class="content-layer md:hidden fixed bottom-0 w-full flex justify-around items-center px-4 py-3 pb-safe glass-nav shadow-[0px_-4px_12px_rgba(0,0,0,0.06)] z-50 rounded-t-xl border-t border-outline-variant/20">
+  <a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all" href="#overview"><span class="material-symbols-outlined">home</span><span class="text-label-sm">Home</span></a>
+  <a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all" href="#zoning"><span class="material-symbols-outlined">videocam</span><span class="text-label-sm">Zoning</span></a>
+  <a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all" href="#audit"><span class="material-symbols-outlined">history</span><span class="text-label-sm">Audit</span></a>
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1 transition-all active:scale-90" href="#reports"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">account_circle</span><span class="text-label-sm font-bold">Profile</span></a>
+</nav>
+
+<div class="content-layer fixed top-8 right-8 bg-white shadow-2xl rounded-2xl p-4 border-l-4 toast-bar toast z-[100] flex items-center gap-4" id="toast" style="border-color:#004ac6;">
+  <div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">verified</span></div>
+  <div><p class="font-bold text-on-surface toast-title">Done</p><p class="text-[12px] text-on-surface-variant toast-subtitle">Action completed.</p></div>
+</div>
+</div>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

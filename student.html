@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EdVanguard AI | Student Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/theme.css"/>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="app-shell">
+<div class="aurora-blob b1"></div>
+<div class="aurora-blob b2"></div>
+<div class="aurora-blob b3"></div>
+
+<!-- Sidebar scrim (mobile) -->
+<div id="sidebarScrim" class="hidden fixed inset-0 bg-black/30 z-30 md:hidden"></div>
+
+<!-- SideNavBar -->
+<aside id="sidebar" class="content-layer flex flex-col h-screen w-64 fixed left-0 top-0 z-40 glass-nav border-r border-outline-variant py-6 gap-2 -translate-x-full md:translate-x-0 transition-transform">
+  <div class="px-6 mb-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shrink-0">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">school</span>
+    </div>
+    <div>
+      <h1 class="text-headline-md font-headline-md text-primary leading-none">EdVanguard AI</h1>
+      <p class="text-[10px] font-label-sm uppercase tracking-wider text-outline opacity-70">Student Portal</p>
+    </div>
+  </div>
+  <nav data-lenis-prevent class="flex-1 flex flex-col gap-1 overflow-y-auto">
+    <a href="#overview" class="nav-item active"><span class="material-symbols-outlined">dashboard</span>Overview</a>
+    <a href="#attendance" class="nav-item"><span class="material-symbols-outlined">fingerprint</span>Attendance</a>
+    <a href="#timetable" class="nav-item"><span class="material-symbols-outlined">calendar_month</span>Timetable</a>
+    <a href="#assignments" class="nav-item"><span class="material-symbols-outlined">assignment</span>Assignments &amp; Quizzes</a>
+    <a href="#transit" class="nav-item"><span class="material-symbols-outlined">directions_bus</span>Bus Tracking</a>
+    <a href="#reports" class="nav-item"><span class="material-symbols-outlined">verified_user</span>Reports &amp; Compliance</a>
+  </nav>
+  <div class="mt-auto px-2 space-y-1">
+    <div class="mx-2 mb-2 p-3 rounded-xl bg-surface-container-low text-[11px] text-on-surface-variant">
+      Previewing as <strong>Student</strong>.
+      <div class="flex flex-wrap gap-2 mt-2">
+        <a href="faculty.html" class="text-primary font-bold hover:underline">Faculty</a>
+        <a href="parent.html" class="text-primary font-bold hover:underline">Parent</a>
+        <a href="admin.html" class="text-primary font-bold hover:underline">Admin</a>
+      </div>
+    </div>
+    <a href="index.html" class="nav-item"><span class="material-symbols-outlined">logout</span>Sign Out</a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="content-layer md:ml-64 min-h-screen pb-24 md:pb-8">
+  <!-- TopNavBar -->
+  <header class="glass-nav shadow-[0px_4px_12px_rgba(0,0,0,0.06)] sticky top-0 z-30">
+    <div class="flex justify-between items-center w-full px-4 md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
+      <div class="flex items-center gap-4">
+        <button id="mobileMenuBtn" class="md:hidden p-2 hover:bg-surface-container rounded-full"><span class="material-symbols-outlined">menu</span></button>
+        <h2 class="text-headline-md font-headline-md font-bold text-primary tracking-tight">Dashboard</h2>
+      </div>
+      <div class="flex items-center gap-2 md:gap-6">
+        <div class="hidden lg:flex items-center bg-surface-container rounded-full px-4 py-2 w-64 border border-outline-variant focus-within:border-primary transition-colors">
+          <span class="material-symbols-outlined text-outline">search</span>
+          <input class="bg-transparent border-none focus:ring-0 text-body-md w-full ml-2" placeholder="Search resources..." type="text"/>
+        </div>
+        <div class="relative">
+          <button class="p-2 hover:bg-surface-container-low rounded-full transition-all" data-toggle="notif"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button>
+          <div id="notifPanel" class="hidden absolute right-0 mt-2 w-72 card p-3 z-50">
+            <p class="text-label-sm font-bold mb-2 px-1">Notifications</p>
+            <div class="space-y-2 text-[13px]">
+              <div class="p-2 rounded-lg bg-surface-container-low"><strong>AI Insight:</strong> Thursday attendance dip detected.</div>
+              <div class="p-2 rounded-lg bg-surface-container-low">Biochemistry Lab report due tomorrow.</div>
+              <div class="p-2 rounded-lg bg-surface-container-low">Bus #402 arriving in 4 minutes.</div>
+            </div>
+          </div>
+        </div>
+        <button class="p-2 hover:bg-surface-container-low rounded-full transition-all" data-demo-action="Settings opened"><span class="material-symbols-outlined">settings</span></button>
+        <div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer bg-primary-fixed flex items-center justify-center font-bold text-primary">A</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="px-4 md:px-margin-desktop py-8 max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter" id="overview">
+    <!-- Welcome -->
+    <div class="lg:col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-4 fade-in-item">
+      <div>
+        <span class="text-label-sm font-label-sm text-primary font-bold uppercase tracking-[0.2em]">Academic Profile</span>
+        <h3 class="text-display-lg font-display-lg text-on-surface">Welcome back, Alex.</h3>
+        <p class="text-on-surface-variant font-body-lg">Your campus status is <span class="text-tertiary font-bold">Compliant</span>. 3 tasks need your attention.</p>
+      </div>
+      <button id="downloadReportBtn" class="flex items-center gap-2 bg-primary text-on-primary h-[48px] px-6 rounded-[14px] font-bold text-body-md hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+        <span class="material-symbols-outlined">verified</span>Download Signed Report
+      </button>
+    </div>
+
+    <!-- Attendance Ring -->
+    <section id="attendance" class="lg:col-span-4 card card-hover p-6 fade-in-item scroll-mt-24">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h4 class="text-headline-md font-headline-md">Real-time Attendance</h4>
+          <p class="text-label-sm font-label-sm text-outline">Current Semester</p>
+        </div>
+        <button class="p-2 bg-primary-container/10 text-primary rounded-xl" title="P(attendance) = (Σ Present / Σ Total) × 100" data-demo-action="Prediction formula: P(attendance) = (ΣPresent / ΣTotal) × 100">
+          <span class="material-symbols-outlined">analytics</span>
+        </button>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-6">
+        <div class="relative w-48 h-48 flex items-center justify-center">
+          <svg class="w-full h-full -rotate-90">
+            <circle class="text-surface-container" cx="96" cy="96" fill="transparent" r="80" stroke="currentColor" stroke-width="12"></circle>
+            <circle class="text-primary progress-bar-fill" cx="96" cy="96" fill="transparent" r="80" stroke="currentColor" stroke-width="12" data-percent="94"></circle>
+          </svg>
+          <div class="absolute flex flex-col items-center">
+            <span class="text-display-lg font-display-lg text-primary">94%</span>
+            <span class="text-label-sm font-label-sm text-outline">+2.4% vs last mo.</span>
+          </div>
+        </div>
+        <div class="w-full grid grid-cols-2 gap-4">
+          <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/30 text-center">
+            <p class="text-label-sm text-outline">Present</p><p class="text-headline-md font-bold">142 Days</p>
+          </div>
+          <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/30 text-center">
+            <p class="text-label-sm text-outline">Tardy</p><p class="text-headline-md font-bold">3 Days</p>
+          </div>
+        </div>
+        <button id="openHistoryBtn" class="w-full h-11 rounded-xl border border-outline-variant font-bold text-label-sm hover:bg-surface-container-low transition-all">View Attendance History</button>
+      </div>
+    </section>
+
+    <!-- Live Bus Tracking -->
+    <section id="transit" class="lg:col-span-8 card card-hover overflow-hidden flex flex-col fade-in-item scroll-mt-24">
+      <div class="p-6 flex justify-between items-center bg-white/80 backdrop-blur-md z-10">
+        <div><h4 class="text-headline-md font-headline-md">Campus Transit</h4><p class="text-label-sm font-label-sm text-outline">Live Tracking: Bus #402 (North Route)</p></div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="text-label-sm font-bold text-tertiary uppercase">Live</span></div>
+      </div>
+      <div class="flex-1 relative min-h-[280px] bg-gradient-to-br from-surface-container-highest to-surface-container-high">
+        <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 200" preserveAspectRatio="none">
+          <path d="M0,150 C100,120 150,180 250,100 S350,40 400,60" stroke="#004ac6" stroke-width="3" fill="none" stroke-dasharray="6 6"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="relative">
+            <div class="absolute -top-12 -left-6 bg-white shadow-xl px-3 py-2 rounded-xl text-label-sm font-bold flex items-center gap-2 whitespace-nowrap">
+              <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1;">directions_bus</span>Arriving in 4m
+              <div class="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45"></div>
+            </div>
+            <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-xl animate-bounce"></div>
+          </div>
+        </div>
+        <div class="absolute bottom-6 left-6 right-6 flex flex-wrap gap-3">
+          <div class="glass-panel px-4 py-2 rounded-full shadow-sm border border-white/50 flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">location_on</span><span class="text-label-sm">Main Library Stop</span></div>
+          <div class="glass-panel px-4 py-2 rounded-full shadow-sm border border-white/50 flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">group</span><span class="text-label-sm">Occupancy: 45%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Today's Classes / Timetable -->
+    <section id="timetable" class="lg:col-span-12 card card-hover p-6 fade-in-item scroll-mt-24">
+      <div class="flex justify-between items-center mb-6">
+        <h4 class="text-headline-md font-headline-md">Today's Classes</h4>
+        <span class="text-label-sm font-label-sm text-outline">Wednesday, July 22</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <button class="subject-card text-left p-4 rounded-2xl border border-outline-variant/40 hover:border-primary transition-all" data-subject="Advanced Calculus" data-teacher="Dr. Rhea Nolan" data-room="Hall 4A" data-time="9:00 – 10:00 AM" data-status="Present">
+          <div class="w-10 h-10 bg-primary-container text-on-primary-container rounded-xl flex items-center justify-center mb-3"><span class="material-symbols-outlined">functions</span></div>
+          <p class="font-bold text-body-md">Advanced Calculus</p><p class="text-label-sm text-outline">9:00 – 10:00 AM · Hall 4A</p>
+          <span class="pill bg-tertiary-container/10 text-tertiary inline-block mt-2">Present</span>
+        </button>
+        <button class="subject-card text-left p-4 rounded-2xl border border-outline-variant/40 hover:border-primary transition-all" data-subject="Biochemistry Lab" data-teacher="Prof. Iris Kwan" data-room="Lab B2" data-time="11:00 AM – 1:00 PM" data-status="Present">
+          <div class="w-10 h-10 bg-tertiary-container text-on-tertiary-container rounded-xl flex items-center justify-center mb-3"><span class="material-symbols-outlined">science</span></div>
+          <p class="font-bold text-body-md">Biochemistry Lab</p><p class="text-label-sm text-outline">11:00 AM – 1:00 PM · Lab B2</p>
+          <span class="pill bg-tertiary-container/10 text-tertiary inline-block mt-2">Present</span>
+        </button>
+        <button class="subject-card text-left p-4 rounded-2xl border border-outline-variant/40 hover:border-primary transition-all" data-subject="AI Ethics Seminar" data-teacher="Dr. Marcus Ito" data-room="Room 210" data-time="2:00 – 3:00 PM" data-status="Upcoming">
+          <div class="w-10 h-10 bg-secondary-container text-on-secondary-container rounded-xl flex items-center justify-center mb-3"><span class="material-symbols-outlined">psychology</span></div>
+          <p class="font-bold text-body-md">AI Ethics Seminar</p><p class="text-label-sm text-outline">2:00 – 3:00 PM · Room 210</p>
+          <span class="pill bg-secondary-container text-on-secondary-container inline-block mt-2">Upcoming</span>
+        </button>
+        <button class="subject-card text-left p-4 rounded-2xl border border-outline-variant/40 hover:border-primary transition-all" data-subject="Campus Governance" data-teacher="Dr. Alistair Vance" data-room="Auditorium" data-time="4:00 – 5:00 PM" data-status="Upcoming">
+          <div class="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-3"><span class="material-symbols-outlined">gavel</span></div>
+          <p class="font-bold text-body-md">Campus Governance</p><p class="text-label-sm text-outline">4:00 – 5:00 PM · Auditorium</p>
+          <span class="pill bg-secondary-container text-on-secondary-container inline-block mt-2">Upcoming</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Assignments -->
+    <section id="assignments" class="lg:col-span-5 card card-hover p-6 fade-in-item scroll-mt-24">
+      <div class="flex justify-between items-center mb-6"><h4 class="text-headline-md font-headline-md">Upcoming Tasks</h4><a class="text-primary text-label-sm font-bold hover:underline" href="#" data-demo-action="Showing all assignments">View All</a></div>
+      <div class="space-y-4">
+        <div class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer border border-transparent hover:border-outline-variant/30">
+          <div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-xl flex items-center justify-center"><span class="material-symbols-outlined">functions</span></div>
+          <div class="flex-1"><h5 class="text-body-md font-bold">Advanced Calculus</h5><p class="text-label-sm text-outline">Derivatives &amp; Integrals · Quiz Prep</p></div>
+          <div class="text-right"><p class="text-label-sm font-bold text-error">Today</p><p class="text-[10px] text-outline uppercase">4:00 PM</p></div>
+        </div>
+        <div class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer border border-transparent hover:border-outline-variant/30">
+          <div class="w-12 h-12 bg-tertiary-container text-on-tertiary-container rounded-xl flex items-center justify-center"><span class="material-symbols-outlined">science</span></div>
+          <div class="flex-1"><h5 class="text-body-md font-bold">Biochemistry Lab</h5><p class="text-label-sm text-outline">Molecular Synthesis Report</p></div>
+          <div class="text-right"><p class="text-label-sm font-bold text-on-surface">Tomorrow</p><p class="text-[10px] text-outline uppercase">11:59 PM</p></div>
+        </div>
+        <div class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer border border-transparent hover:border-outline-variant/30">
+          <div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-xl flex items-center justify-center"><span class="material-symbols-outlined">psychology</span></div>
+          <div class="flex-1"><h5 class="text-body-md font-bold">AI Ethics Seminar</h5><p class="text-label-sm text-outline">Weekly Reflection Essay</p></div>
+          <div class="text-right"><p class="text-label-sm font-bold text-on-surface">Oct 24</p><p class="text-[10px] text-outline uppercase">9:00 AM</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Attendance Forecast -->
+    <section class="lg:col-span-7 card card-hover p-6 relative overflow-hidden fade-in-item">
+      <div class="flex justify-between items-start mb-6">
+        <div><h4 class="text-headline-md font-headline-md">Attendance Forecast</h4><p class="text-label-sm font-label-sm text-outline">AI-Driven Risk &amp; Performance Analysis</p></div>
+        <div class="bg-primary/5 px-4 py-2 rounded-full"><span class="text-label-sm font-bold text-primary">Predictive Model v4.2</span></div>
+      </div>
+      <div class="h-56 flex items-end justify-between gap-2 md:gap-4 mt-4 relative">
+        <div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10">
+          <div class="border-t border-on-surface"></div><div class="border-t border-on-surface"></div><div class="border-t border-on-surface"></div><div class="border-t border-on-surface"></div>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-surface-container-high rounded-t-lg h-[60%]"></div><span class="text-[10px] font-label-sm text-outline">Mon</span></div>
+        <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-surface-container-high rounded-t-lg h-[85%]"></div><span class="text-[10px] font-label-sm text-outline">Tue</span></div>
+        <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-primary rounded-t-lg h-[95%]"></div><span class="text-[10px] font-label-sm text-outline font-bold text-primary">Wed</span></div>
+        <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-primary-container/40 rounded-t-lg h-[92%] border-2 border-dashed border-primary"></div><span class="text-[10px] font-label-sm text-outline italic">Thu (P)</span></div>
+        <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-primary-container/40 rounded-t-lg h-[88%] border-2 border-dashed border-primary"></div><span class="text-[10px] font-label-sm text-outline italic">Fri (P)</span></div>
+      </div>
+      <div class="mt-6 p-4 bg-tertiary-fixed/10 border border-tertiary/20 rounded-2xl flex gap-4 items-center">
+        <span class="material-symbols-outlined text-tertiary" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
+        <p class="text-body-md text-on-tertiary-fixed-variant"><strong>AI Insight:</strong> Your attendance pattern shows a 15% dip on Thursday afternoons. Consider checking your schedule for conflicts.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Reports & Compliance -->
+  <div id="reports" class="px-4 md:px-margin-desktop pb-8 max-w-container-max-width mx-auto scroll-mt-24">
+    <section class="card p-6 fade-in-item">
+      <h4 class="text-headline-md font-headline-md mb-4">Reports &amp; Compliance</h4>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <button id="downloadReportBtn2" class="flex items-center gap-3 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all text-left">
+          <span class="material-symbols-outlined text-primary">picture_as_pdf</span>
+          <div><p class="font-bold text-body-md">Signed Attendance Certificate</p><p class="text-label-sm text-outline">Cryptographically signed PDF</p></div>
+        </button>
+        <button class="flex items-center gap-3 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all text-left" data-demo-action="Scholarship exemption request submitted">
+          <span class="material-symbols-outlined text-primary">school</span>
+          <div><p class="font-bold text-body-md">Scholarship Exemption</p><p class="text-label-sm text-outline">Submit eligibility report</p></div>
+        </button>
+        <button class="flex items-center gap-3 p-4 rounded-xl border border-outline-variant hover:border-primary transition-all text-left" data-demo-action="Medical exemption request submitted">
+          <span class="material-symbols-outlined text-primary">local_hospital</span>
+          <div><p class="font-bold text-body-md">Medical Exemption</p><p class="text-label-sm text-outline">Submit doctor's note reference</p></div>
+        </button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- BottomNavBar (Mobile) -->
+<nav class="content-layer md:hidden fixed bottom-0 w-full flex justify-around items-center px-4 py-3 pb-safe glass-nav shadow-lg z-50 rounded-t-xl">
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1" href="#overview"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span><span class="text-label-sm font-label-sm">Home</span></a>
+  <a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all" href="#attendance"><span class="material-symbols-outlined">fingerprint</span><span class="text-label-sm font-label-sm">Attendance</span></a>
+  <a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all" href="#transit"><span class="material-symbols-outlined">location_on</span><span class="text-label-sm font-label-sm">Tracking</span></a>
+  <a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all" href="#reports"><span class="material-symbols-outlined">account_circle</span><span class="text-label-sm font-label-sm">Profile</span></a>
+</nav>
+
+<!-- FAB: AI Assistant Chatbot -->
+<button id="chatFab" class="content-layer fixed bottom-24 right-6 md:bottom-8 md:right-8 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-40">
+  <span class="material-symbols-outlined text-[28px]">chat_bubble</span>
+</button>
+<div id="chatWindow" class="chat-window content-layer fixed bottom-40 right-6 md:right-8 w-[90vw] max-w-[340px] h-[420px] card flex flex-col z-50 overflow-hidden">
+  <div class="p-4 bg-primary text-white flex justify-between items-center">
+    <div><p class="font-bold">EdVanguard Assistant</p><p class="text-[11px] opacity-80">Ask about attendance, homework, or transit</p></div>
+    <button id="chatClose"><span class="material-symbols-outlined">close</span></button>
+  </div>
+  <div id="chatBody" data-lenis-prevent class="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
+    <div class="mr-auto max-w-[85%] bg-surface-container-low text-on-surface text-[13px] rounded-2xl rounded-tl-sm px-4 py-2">Hi Alex! I can help with attendance forecasts, homework, or your bus ETA. What do you need?</div>
+  </div>
+  <form id="chatForm" class="p-3 border-t border-outline-variant flex gap-2">
+    <input id="chatInput" class="flex-1 h-10 px-3 rounded-full border border-outline-variant input-focus-ring text-[13px]" placeholder="Type a message..."/>
+    <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">send</span></button>
+  </form>
+</div>
+
+<!-- Subject Details Modal -->
+<div id="subjectModal" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/40">
+  <div class="card w-full max-w-md p-6 relative">
+    <button onclick="document.getElementById('subjectModal').classList.add('hidden')" class="absolute top-4 right-4 text-outline hover:text-on-surface"><span class="material-symbols-outlined">close</span></button>
+    <h4 class="text-headline-md font-headline-md mb-1" id="modalSubject">Subject</h4>
+    <p class="text-label-sm text-outline mb-4" id="modalMeta">Teacher · Room · Time</p>
+    <div class="space-y-3 text-body-md">
+      <div class="flex justify-between p-3 bg-surface-container-low rounded-xl"><span>Status Today</span><span class="font-bold" id="modalStatus">Present</span></div>
+      <div class="flex justify-between p-3 bg-surface-container-low rounded-xl"><span>Term Attendance</span><span class="font-bold">96%</span></div>
+      <div class="flex justify-between p-3 bg-surface-container-low rounded-xl"><span>Next Assessment</span><span class="font-bold">Oct 24</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Attendance History Modal -->
+<div id="historyModal" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/40">
+  <div data-lenis-prevent class="card w-full max-w-2xl p-6 relative max-h-[85vh] overflow-y-auto">
+    <button onclick="document.getElementById('historyModal').classList.add('hidden')" class="absolute top-4 right-4 text-outline hover:text-on-surface"><span class="material-symbols-outlined">close</span></button>
+    <h4 class="text-headline-md font-headline-md mb-4">Attendance History</h4>
+    <table class="w-full text-left text-body-md">
+      <thead><tr class="text-label-sm text-secondary border-b border-outline-variant"><th class="pb-3">Date</th><th class="pb-3">Subject</th><th class="pb-3">Status</th><th class="pb-3">Confidence</th></tr></thead>
+      <tbody>
+        <tr class="border-b border-outline-variant/30"><td class="py-3 font-label-sm text-[13px]">Jul 21, 2026</td><td class="py-3">Advanced Calculus</td><td class="py-3"><span class="pill bg-tertiary-container/10 text-tertiary">Present</span></td><td class="py-3 font-label-sm text-[13px]">99.6%</td></tr>
+        <tr class="border-b border-outline-variant/30"><td class="py-3 font-label-sm text-[13px]">Jul 20, 2026</td><td class="py-3">Biochemistry Lab</td><td class="py-3"><span class="pill bg-tertiary-container/10 text-tertiary">Present</span></td><td class="py-3 font-label-sm text-[13px]">98.9%</td></tr>
+        <tr class="border-b border-outline-variant/30"><td class="py-3 font-label-sm text-[13px]">Jul 17, 2026</td><td class="py-3">AI Ethics Seminar</td><td class="py-3"><span class="pill bg-error-container text-on-error-container">Tardy</span></td><td class="py-3 font-label-sm text-[13px]">97.1%</td></tr>
+        <tr><td class="py-3 font-label-sm text-[13px]">Jul 16, 2026</td><td class="py-3">Campus Governance</td><td class="py-3"><span class="pill bg-tertiary-container/10 text-tertiary">Present</span></td><td class="py-3 font-label-sm text-[13px]">99.2%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="content-layer fixed top-8 right-8 bg-white shadow-2xl rounded-2xl p-4 border-l-4 toast-bar toast z-[100] flex items-center gap-4" id="toast" style="border-color:#004ac6;">
+  <div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">verified</span></div>
+  <div><p class="font-bold text-on-surface toast-title">Report generated</p><p class="text-[12px] text-on-surface-variant toast-subtitle">Your signed PDF is ready.</p></div>
+</div>
+
+</div>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  document.querySelectorAll('.nav-item[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      a.classList.add('active');
+      document.getElementById('sidebarScrim')?.classList.add('hidden');
+      document.getElementById('sidebar')?.classList.add('-translate-x-full');
+    });
+  });
+
+  [document.getElementById('downloadReportBtn'), document.getElementById('downloadReportBtn2')].forEach(btn => {
+    btn && btn.addEventListener('click', () => showToast('Report generated', 'Your signed PDF is ready to download.'));
+  });
+
+  document.getElementById('openHistoryBtn').addEventListener('click', () => document.getElementById('historyModal').classList.remove('hidden'));
+
+  document.querySelectorAll('.subject-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.getElementById('modalSubject').textContent = card.dataset.subject;
+      document.getElementById('modalMeta').textContent = `${card.dataset.teacher} · ${card.dataset.room} · ${card.dataset.time}`;
+      document.getElementById('modalStatus').textContent = card.dataset.status;
+      document.getElementById('subjectModal').classList.remove('hidden');
+    });
+  });
+</script>
+</body>
+</html>

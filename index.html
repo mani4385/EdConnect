@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In | EdVanguard AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/theme.css"/>
+<style>
+  .role-card{transition:all .2s ease}
+  .role-card.active{border-color:#004ac6;background:rgba(37,99,235,0.06);box-shadow:0 0 0 3px rgba(37,99,235,0.10)}
+</style>
+</head>
+<body class="font-body-md">
+<div class="app-shell flex items-center justify-center py-12">
+  <div class="aurora-blob b1"></div>
+  <div class="aurora-blob b2"></div>
+  <div class="aurora-blob b3"></div>
+
+  <main class="content-layer relative w-full max-w-[520px] px-margin-mobile md:px-0">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-primary-container text-white rounded-2xl mb-6 shadow-lg">
+        <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL' 1;">school</span>
+      </div>
+      <h1 class="font-headline-lg text-headline-lg text-primary tracking-tight mb-2">EdVanguard AI</h1>
+      <p class="text-on-surface-variant font-body-md">Sign in to your autonomous campus dashboard</p>
+      <p class="text-label-sm font-label-sm text-outline mt-1 uppercase tracking-wider">Temporary placeholder branding — logo &amp; name to be swapped later</p>
+    </div>
+
+    <div class="card glass-panel p-8 border border-white/40">
+      <!-- Role selector (drives the demo redirect target) -->
+      <div class="mb-6">
+        <label class="block text-label-sm font-label-sm text-on-surface-variant mb-2 ml-1">I AM SIGNING IN AS</label>
+        <div class="grid grid-cols-4 gap-2" id="roleGroup">
+          <button type="button" data-role="student.html" class="role-card active flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant text-[12px] font-bold">
+            <span class="material-symbols-outlined text-primary">backpack</span>Student
+          </button>
+          <button type="button" data-role="faculty.html" class="role-card flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant text-[12px] font-bold">
+            <span class="material-symbols-outlined text-primary">person</span>Faculty
+          </button>
+          <button type="button" data-role="parent.html" class="role-card flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant text-[12px] font-bold">
+            <span class="material-symbols-outlined text-primary">family_restroom</span>Parent
+          </button>
+          <button type="button" data-role="admin.html" class="role-card flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant text-[12px] font-bold">
+            <span class="material-symbols-outlined text-primary">admin_panel_settings</span>Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Auth Type Toggle -->
+      <div class="flex bg-surface-container-low rounded-xl p-1 mb-6">
+        <button type="button" class="flex-1 py-2 text-label-sm font-label-sm rounded-lg bg-white shadow-sm text-primary" id="passwordTabBtn">PASSWORD</button>
+        <button type="button" class="flex-1 py-2 text-label-sm font-label-sm rounded-lg text-on-secondary-container hover:text-primary transition-colors" id="otpToggle">PASSKEY / OTP</button>
+      </div>
+
+      <form class="space-y-5" id="loginForm">
+        <div class="space-y-2">
+          <label class="block text-label-sm font-label-sm text-on-surface-variant ml-1" for="identifier">EMAIL OR PHONE</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">alternate_email</span>
+            <input class="w-full h-12 pl-12 pr-4 rounded-xl border border-outline-variant bg-white/50 input-focus-ring transition-all" id="identifier" placeholder="you@campus.edu" type="text"/>
+          </div>
+        </div>
+        <div class="space-y-2" id="inputContainer">
+          <div class="flex justify-between items-center ml-1">
+            <label class="text-label-sm font-label-sm text-on-surface-variant" for="password">PASSWORD</label>
+            <a class="text-label-sm font-label-sm text-primary hover:underline" href="#" data-demo-action="Password reset link sent">Forgot?</a>
+          </div>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
+            <input class="w-full h-12 pl-12 pr-4 rounded-xl border border-outline-variant bg-white/50 input-focus-ring transition-all" id="password" placeholder="••••••••" type="password"/>
+          </div>
+        </div>
+        <button class="w-full h-14 bg-primary text-white rounded-xl font-headline-md text-body-md shadow-lg btn-active hover:bg-primary-container transition-all flex items-center justify-center gap-2 group" type="submit">
+          <span>Continue</span>
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+      </form>
+
+      <div class="relative my-6">
+        <div class="absolute inset-0 flex items-center"><span class="w-full border-t border-outline-variant"></span></div>
+        <div class="relative flex justify-center text-label-sm font-label-sm">
+          <span class="bg-surface-container-low px-4 text-on-secondary-fixed-variant rounded-full">OR SECURE ACCESS</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <button class="flex items-center justify-center gap-2 h-12 rounded-xl border border-outline-variant hover:bg-white transition-all text-on-surface font-body-md text-[14px] btn-active" data-demo-action="Passkey scan simulated">
+          <span class="material-symbols-outlined !text-xl" style="font-variation-settings:'FILL' 1;">fingerprint</span><span>Passkey</span>
+        </button>
+        <button class="flex items-center justify-center gap-2 h-12 rounded-xl border border-outline-variant hover:bg-white transition-all text-on-surface font-body-md text-[14px] btn-active" data-demo-action="Face ID scan simulated">
+          <span class="material-symbols-outlined !text-xl" style="font-variation-settings:'FILL' 1;">face</span><span>Face ID</span>
+        </button>
+      </div>
+    </div>
+
+    <footer class="mt-8 flex flex-col items-center gap-4">
+      <p class="text-on-secondary-fixed-variant font-body-md text-[14px]">Don't have an account? <a class="text-primary font-bold hover:underline" href="#" data-demo-action="Admin contact form opened">Contact Admin</a></p>
+      <div class="flex gap-6">
+        <a class="text-label-sm font-label-sm text-outline hover:text-on-surface transition-colors" href="#" data-demo-action="Privacy policy">Privacy Policy</a>
+        <a class="text-label-sm font-label-sm text-outline hover:text-on-surface transition-colors" href="#" data-demo-action="Help center">Help Center</a>
+      </div>
+    </footer>
+  </main>
+
+  <div class="fixed top-8 right-8 bg-white shadow-2xl rounded-2xl p-4 border-l-4 toast-bar toast transition-transform duration-500 z-[100] flex items-center gap-4" id="toast" style="border-color:#004ac6;">
+    <div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">verified</span>
+    </div>
+    <div>
+      <p class="font-bold text-on-surface toast-title">Secure Session Started</p>
+      <p class="text-[12px] text-on-surface-variant toast-subtitle">Redirecting to your dashboard...</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  let selectedRole = 'student.html';
+  document.querySelectorAll('#roleGroup .role-card').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#roleGroup .role-card').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedRole = btn.dataset.role;
+    });
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    showToast('Secure Session Started', 'Redirecting to your dashboard...');
+    setTimeout(() => { window.location.href = selectedRole; }, 900);
+  });
+
+  const otpBtn = document.getElementById('otpToggle');
+  const passwordTabBtn = document.getElementById('passwordTabBtn');
+  const inputContainer = document.getElementById('inputContainer');
+  let isOtpMode = false;
+  otpBtn.addEventListener('click', () => {
+    isOtpMode = !isOtpMode;
+    passwordTabBtn.classList.toggle('bg-white', !isOtpMode);
+    passwordTabBtn.classList.toggle('shadow-sm', !isOtpMode);
+    passwordTabBtn.classList.toggle('text-primary', !isOtpMode);
+    otpBtn.classList.toggle('bg-white', isOtpMode);
+    otpBtn.classList.toggle('shadow-sm', isOtpMode);
+    otpBtn.classList.toggle('text-primary', isOtpMode);
+    if (isOtpMode) {
+      inputContainer.innerHTML = `
+        <div class="flex justify-between items-center ml-1">
+          <label class="text-label-sm font-label-sm text-on-surface-variant">ONE-TIME PASSCODE</label>
+          <button type="button" class="text-label-sm font-label-sm text-primary hover:underline" data-demo-action="OTP resent">Resend code</button>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">key</span>
+          <input type="text" maxlength="6" placeholder="0 0 0 0 0 0" class="w-full h-12 pl-12 pr-4 rounded-xl border border-outline-variant bg-white/50 input-focus-ring transition-all tracking-[0.5em] font-bold">
+        </div>`;
+    } else {
+      inputContainer.innerHTML = `
+        <div class="flex justify-between items-center ml-1">
+          <label class="text-label-sm font-label-sm text-on-surface-variant" for="password">PASSWORD</label>
+          <a class="text-label-sm font-label-sm text-primary hover:underline" href="#" data-demo-action="Password reset link sent">Forgot?</a>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
+          <input class="w-full h-12 pl-12 pr-4 rounded-xl border border-outline-variant bg-white/50 input-focus-ring transition-all" id="password" placeholder="••••••••" type="password"/>
+        </div>`;
+    }
+  });
+</script>
+</body>
+</html>
